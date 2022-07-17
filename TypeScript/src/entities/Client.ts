@@ -1,4 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column, Entity, ManyToMany, PrimaryGeneratedColumn,
+} from 'typeorm';
+import Asset from './Asset';
 
 @Entity('clients')
 export default class Client {
@@ -13,4 +16,7 @@ export default class Client {
 
   @Column({ type: 'decimal' })
     balance: number;
+
+  @ManyToMany(() => Asset, (asset) => asset.clients)
+    assets: Asset[];
 }
