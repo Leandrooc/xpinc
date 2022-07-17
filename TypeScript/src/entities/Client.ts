@@ -8,6 +8,9 @@ export default class Client {
   @Column({ type: 'text' })
     name: string;
 
+  @Column({ type: 'text' })
+    email: string;
+
   @Column({ type: 'decimal' })
     balance: number;
 }
