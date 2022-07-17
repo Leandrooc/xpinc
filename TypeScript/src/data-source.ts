@@ -11,6 +11,8 @@ const AppDataSource = new DataSource({
   username: process.env.DB_USER || 'root',
   password: process.env.DB_PASSWORD || 'root',
   database: process.env.DB_NAME || 'xp',
+  entities: [`${__dirname}/**/entities/*.{ts,js}`],
+  migrations: [`${__dirname}/**/migrations/*.{ts,js}`],
 });
 
 export default AppDataSource;
