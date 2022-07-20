@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 
-class httpError extends Error {
+export class HttpError extends Error {
   public readonly status: number;
 
   constructor(message: string, status: number) {
@@ -10,7 +10,7 @@ class httpError extends Error {
 }
 
 const error = (err: Error, req: Request, res: Response, _next: NextFunction) => {
-  const { message, status } = err as httpError;
+  const { message, status } = err as HttpError;
   res.status(status || 500).json({ message });
 };
 
