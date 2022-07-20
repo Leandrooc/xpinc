@@ -9,7 +9,11 @@ const accountRouter = Router();
 const accountServiceWithRepository = new AccountService(clientRepository);
 const accountController = new AccountController(accountServiceWithRepository);
 
-accountRouter.post('/deposit', middlewares.accoutDeposit, (req: Request, res: Response) => accountController.deposit(req, res));
+accountRouter.post(
+  '/deposit',
+  middlewares.accoutDeposit,
+  (req: Request, res: Response) => accountController.deposit(req, res),
+);
 // accountRouter.post('/withdraw', accountController.withdraw);
 
 export default accountRouter;
