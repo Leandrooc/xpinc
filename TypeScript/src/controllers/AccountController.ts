@@ -6,17 +6,15 @@ import AccountService from '../services/AccountService';
 export default class AccountController {
   private readonly accountService;
 
-  constructor() {
-    this.accountService = new AccountService();
+  constructor(accountService: AccountService) {
+    this.accountService = accountService;
   }
 
   async deposit(req: Request, res: Response): Promise<Response> {
     const { clientId, depositValue } = req.body;
 
-    if (depositValue <= 0) {
-      return res.status(400)
-        .json({ message: 'Você não pode depositar valores menores ou igual a 0' });
-    }
+    // if (depositValue <= 0) return res.status(400)
+    // .json({ message: 'Você não pode depositar valores menores ou igual a 0' });.
 
     const user: Client | null = await this.accountService.getUserById(clientId);
     if (!user) return res.status(404).json({ message: 'Cliente não encontrado!' });

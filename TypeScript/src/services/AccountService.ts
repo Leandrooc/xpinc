@@ -1,11 +1,10 @@
 import { Repository } from 'typeorm';
 import Client from '../entities/Client';
-import clientRepository from '../repositories/clientRepository';
 
 export default class AccountService {
   private readonly ClientRepository: Repository<Client>;
 
-  constructor() {
+  constructor(clientRepository: Repository<Client>) {
     this.ClientRepository = clientRepository;
   }
 
