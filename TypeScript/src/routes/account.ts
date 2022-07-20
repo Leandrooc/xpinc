@@ -14,6 +14,10 @@ accountRouter.post(
   middlewares.accoutDeposit,
   (req: Request, res: Response) => accountController.deposit(req, res),
 );
-// accountRouter.post('/withdraw', accountController.withdraw);
+accountRouter.post(
+  '/withdraw',
+  middlewares.accountWithdraw,
+  (req: Request, res: Response) => accountController.withdraw(req, res),
+);
 
 export default accountRouter;

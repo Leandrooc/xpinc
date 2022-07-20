@@ -1,6 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import { Request, Response } from 'express';
 import Client from '../entities/Client';
+import { HttpError } from '../middlewares/error';
 import AccountService from '../services/AccountService';
 
 export default class AccountController {
@@ -23,6 +24,24 @@ export default class AccountController {
       message: 'Depósito efetuado com sucesso!',
       user,
       depositedValue: depositValue,
+      newBalance,
+    });
+  }
+
+  async withdraw(req: Request, res: Response): Promise<Response> {
+    const { clientId, withdrawValue } = req.body;
+
+    const user: Client = await this.accountService.getUserById(clientId);
+
+    const newBalance = +user.balance - (+withdrawValue);
+    if (newBalance < 0) throw new HttpError('Saldo insuficiente', 400);
+
+    await this.accountService.updateBalance(clientId, newBalance);
+
+    return res.status(200).json({
+      message: 'Saque efetuado com sucesso!',
+      user,
+      withdrawalValue: withdrawValue,
       newBalance,
     });
   }
