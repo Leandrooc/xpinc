@@ -1,7 +1,7 @@
 import {
-  Column, Entity, ManyToMany, PrimaryGeneratedColumn,
+  Column, Entity, OneToMany, PrimaryGeneratedColumn,
 } from 'typeorm';
-import Asset from './Asset';
+import AssetInCustody from './AssetInCustody';
 
 @Entity('clients')
 export default class Client {
@@ -14,9 +14,9 @@ export default class Client {
   @Column({ type: 'text' })
     email: string;
 
-  @Column({ type: 'decimal' })
+  @Column('decimal', { precision: 20, scale: 6, default: 0 })
     balance: number;
 
-  @ManyToMany(() => Asset, (asset) => asset.clients)
-    assets: Asset[];
+  @OneToMany(() => AssetInCustody, (AssetInC) => AssetInC.clientId)
+    assetInCustody: AssetInCustody[];
 }

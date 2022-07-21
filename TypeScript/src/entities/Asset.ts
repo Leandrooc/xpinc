@@ -1,7 +1,7 @@
 import {
-  Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn,
+  Column, Entity, OneToMany, PrimaryGeneratedColumn,
 } from 'typeorm';
-import Client from './Client';
+import AssetInCustody from './AssetInCustody';
 
 @Entity('assets')
 export default class Asset {
@@ -14,20 +14,9 @@ export default class Asset {
   @Column({ type: 'integer' })
     quantity: number;
 
-  @Column({ type: 'decimal' })
+  @Column('decimal', { precision: 20, scale: 6 })
     value: number;
 
-  @ManyToMany(() => Client, (client) => client.assets)
-  @JoinTable({
-    name: 'assets_in_custody',
-    joinColumn: {
-      name: 'client_id',
-      referencedColumnName: 'id',
-    },
-    inverseJoinColumn: {
-      name: 'asset_id',
-      referencedColumnName: 'id',
-    },
-  })
-    clients: Client[];
+  @OneToMany(() => AssetInCustody, (AssetInC) => AssetInC.assetId)
+    assetInCustody: AssetInCustody[];
 }
