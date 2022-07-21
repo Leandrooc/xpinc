@@ -20,4 +20,9 @@ accountRouter.post(
   (req: Request, res: Response) => accountController.withdraw(req, res),
 );
 
+accountRouter.get(
+  '/:clientId',
+  (req: Request, res: Response) => accountController.getBalance(req, res),
+);
+
 export default accountRouter;

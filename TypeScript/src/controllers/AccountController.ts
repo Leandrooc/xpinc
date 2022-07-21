@@ -45,4 +45,10 @@ export default class AccountController {
       newBalance,
     });
   }
+
+  async getBalance(req: Request, res: Response): Promise<Response> {
+    const { clientId } = req.params;
+    const { id, balance }: Client = await this.accountService.getUserById(+clientId);
+    return res.status(200).json({ clientId: id, balance });
+  }
 }
