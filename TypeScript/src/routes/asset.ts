@@ -13,4 +13,9 @@ assetRouter.get(
   (req: Request, res: Response) => assetController.getAssets(req, res),
 );
 
+assetRouter.get(
+  '/:id',
+  (req: Request, res: Response) => assetController.getAssetById(req, res),
+);
+
 export default assetRouter;

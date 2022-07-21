@@ -12,4 +12,10 @@ export default class AssetController {
     const assets = await this.assetService.getAssets();
     return res.status(200).json(assets);
   }
+
+  async getAssetById(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+    const assets = await this.assetService.getAssetById(+id);
+    return res.status(200).json(assets);
+  }
 }
