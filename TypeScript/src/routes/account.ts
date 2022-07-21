@@ -25,4 +25,9 @@ accountRouter.get(
   (req: Request, res: Response) => accountController.getBalance(req, res),
 );
 
+accountRouter.get(
+  '/',
+  (req: Request, res: Response) => accountController.getClients(req, res),
+);
+
 export default accountRouter;

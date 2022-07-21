@@ -9,6 +9,16 @@ export default class AccountService {
     this.ClientRepository = clientRepository;
   }
 
+  public async getClients(): Promise<[Client[], number]> {
+    const users = await this.ClientRepository.findAndCount({
+      select: [
+        'id',
+        'balance',
+      ],
+    });
+    return users;
+  }
+
   public async getUserById(id: number): Promise<Client> {
     const user = await this.ClientRepository.findOne({ where: { id } });
     if (!user) throw new HttpError('Cliente não encontrado!', 404);

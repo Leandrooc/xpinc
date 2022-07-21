@@ -51,4 +51,9 @@ export default class AccountController {
     const { id, balance }: Client = await this.accountService.getUserById(+clientId);
     return res.status(200).json({ clientId: id, balance });
   }
+
+  async getClients(req: Request, res: Response): Promise<Response> {
+    const [clients, numberOfClients] = await this.accountService.getClients();
+    return res.status(200).json({ numberOfClients, clients });
+  }
 }
