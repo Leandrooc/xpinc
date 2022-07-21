@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { HttpError } from './error';
 
-export default function investmentBuy(req: Request, res: Response, next: NextFunction) {
+export default function investmentData(req: Request, res: Response, next: NextFunction) {
   const { clientId, assetId, quantity } = req.body;
 
   if (!clientId || !assetId || !quantity) {

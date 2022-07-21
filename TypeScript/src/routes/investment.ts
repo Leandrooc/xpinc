@@ -17,8 +17,14 @@ const investmentController = new InvestmentController(investmentServiceWithRepos
 
 investmentRouter.post(
   '/buy',
-  middlewares.investmentBuy,
+  middlewares.investmentData,
   (req: Request, res: Response) => investmentController.buy(req, res),
+);
+
+investmentRouter.post(
+  '/sell',
+  middlewares.investmentData,
+  (req: Request, res: Response) => investmentController.sell(req, res),
 );
 
 export default investmentRouter;
