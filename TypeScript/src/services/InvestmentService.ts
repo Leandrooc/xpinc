@@ -33,8 +33,6 @@ export default class InvestmentService {
     const assetsPrice: number = +asset.value * quantity;
     if (assetsPrice > +user.balance) throw new HttpError('Saldo insuficiente', 400);
 
-    if (quantity < 1) throw new HttpError('Não é possível comprar 0 ativos', 400);
-
     //
     const updatedBalance = +user.balance - assetsPrice;
     await this.ClientRepository.update({ id: clientId }, { balance: updatedBalance });

@@ -4,6 +4,7 @@ import InvestmentService from '../services/InvestmentService';
 import InvestmentController from '../controllers/InvestmentController';
 import assetRepository from '../repositories/assetRepository';
 import assetInCustodyRepository from '../repositories/assetInCustodyRepository';
+import middlewares from '../middlewares';
 
 const investmentRouter = Router();
 
@@ -16,6 +17,7 @@ const investmentController = new InvestmentController(investmentServiceWithRepos
 
 investmentRouter.post(
   '/buy',
+  middlewares.investmentBuy,
   (req: Request, res: Response) => investmentController.buy(req, res),
 );
 
