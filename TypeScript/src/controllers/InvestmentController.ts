@@ -10,7 +10,9 @@ export default class AssetController {
 
   async buy(req: Request, res: Response): Promise<Response> {
     const { clientId, assetId, quantity } = req.body;
-    const asset = await this.investmentService.buy(clientId, assetId, quantity);
-    return res.status(200).json(asset);
+    const success = await this.investmentService.buy(clientId, assetId, quantity);
+
+    if (!success) return res.status(400).json({ message: 'Erro interno, compra não realizada' });
+    return res.status(201).json({ message: 'Compra realizada com sucesso' });
   }
 }

@@ -3,10 +3,15 @@ import clientRepository from '../repositories/clientRepository';
 import InvestmentService from '../services/InvestmentService';
 import InvestmentController from '../controllers/InvestmentController';
 import assetRepository from '../repositories/assetRepository';
+import assetInCustodyRepository from '../repositories/assetInCustodyRepository';
 
 const investmentRouter = Router();
 
-const investmentServiceWithRepositories = new InvestmentService(assetRepository, clientRepository);
+const investmentServiceWithRepositories = new InvestmentService(
+  assetRepository,
+  clientRepository,
+  assetInCustodyRepository,
+);
 const investmentController = new InvestmentController(investmentServiceWithRepositories);
 
 investmentRouter.post(
