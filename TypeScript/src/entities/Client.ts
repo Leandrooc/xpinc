@@ -14,6 +14,9 @@ export default class Client {
   @Column({ type: 'text' })
     email: string;
 
+  @Column({ type: 'text' })
+    password: string;
+
   @Column('decimal', { precision: 20, scale: 6, default: 0 })
     balance: number;
 

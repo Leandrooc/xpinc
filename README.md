@@ -2,4 +2,4 @@
 
 Repositório destinado ao desafio técnico da XP Inc.
 
-O desafio será realizado em TypeScript e posteriormente em C#, portanto existem duas pastas, uma para cada linguagem.
+O desafio será realizado em TypeScript.
