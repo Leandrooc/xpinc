@@ -3,6 +3,8 @@ import accoutDeposit from './accountDeposit';
 import accountWithdraw from './accountWithdraw';
 import investmentData from './investmentData';
 import createClient from './createClient';
+import login from './login';
+import isLogged from './isLogged';
 
 export default {
   error,
@@ -10,4 +12,6 @@ export default {
   accountWithdraw,
   investmentData,
   createClient,
+  login,
+  isLogged,
 };

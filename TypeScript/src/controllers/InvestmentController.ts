@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import InvestmentService from '../services/InvestmentService';
 
-export default class AssetController {
+export default class InvestmentController {
   private readonly investmentService;
 
   constructor(investmentService: InvestmentService) {

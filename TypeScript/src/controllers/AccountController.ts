@@ -74,4 +74,10 @@ export default class AccountController {
 
     return res.status(201).json({ message: 'Conta criada com sucesso!' });
   }
+
+  public async getAssetsValue(req: Request, res: Response): Promise<Response> {
+    const id: number = +res.locals.loggedUserId;
+    const assetsWithValues = await this.accountService.getAssetsValue(id);
+    return res.status(200).json(assetsWithValues);
+  }
 }

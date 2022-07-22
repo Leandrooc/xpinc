@@ -51,7 +51,7 @@ export default class AccountService {
         clientId: client.id,
         clientBalance: client.balance,
         assetsInCustody: client.assetInCustody.map((asset: any) => ({
-          assetId: asset.id,
+          assetId: asset.assetId.id,
           quantity: asset.quantity,
           value: asset.assetId.value,
         })).filter(({ quantity }) => quantity > 0),
@@ -59,5 +59,21 @@ export default class AccountService {
       return formatedClient;
     }
     return client;
+  }
+
+  public async getAssetsValue(id: number) {
+    const client = await this.ClientRepository.findOne({ where: { id }, relations: ['assetInCustody.assetId'], select: ['id', 'balance'] });
+    if (!client) throw new HttpError('Usuário inexistente, ou token expirado', 404);
+    const clientWithTotalValue = {
+      clientId: client.id,
+      clientBalance: client.balance,
+      assetsInCustody: client.assetInCustody.map((asset: any) => ({
+        assetId: asset.assetId.id,
+        quantity: asset.quantity,
+        value: asset.assetId.value,
+        totalValue: asset.quantity * (+asset.assetId.value),
+      })).filter(({ quantity }) => quantity > 0),
+    };
+    return clientWithTotalValue;
   }
 }

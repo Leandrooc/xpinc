@@ -20,10 +20,17 @@ accountRouter.post(
   middlewares.accoutDeposit,
   (req: Request, res: Response) => accountController.deposit(req, res),
 );
+
 accountRouter.post(
   '/withdraw',
   middlewares.accountWithdraw,
   (req: Request, res: Response) => accountController.withdraw(req, res),
+);
+
+accountRouter.get(
+  '/me',
+  middlewares.isLogged,
+  (req: Request, res: Response) => accountController.getAssetsValue(req, res),
 );
 
 accountRouter.get(
