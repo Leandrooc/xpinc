@@ -10,6 +10,11 @@ const accountServiceWithRepository = new AccountService(clientRepository);
 const accountController = new AccountController(accountServiceWithRepository);
 
 accountRouter.post(
+  '/',
+  (req: Request, res: Response) => accountController.createClient(req, res),
+);
+
+accountRouter.post(
   '/deposit',
   middlewares.accoutDeposit,
   (req: Request, res: Response) => accountController.deposit(req, res),

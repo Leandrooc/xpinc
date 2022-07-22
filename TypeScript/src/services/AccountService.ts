@@ -26,6 +26,19 @@ export default class AccountService {
     return client;
   }
 
+  public async verifyEmail(email: 'string'): Promise<void> {
+    const client = await this.ClientRepository.findOne({ where: { email } });
+    if (client) throw new HttpError('Esse email já está registrado', 400);
+  }
+
+  public async createClient(name: string, email: string, password: string): Promise<void> {
+    await this.ClientRepository.insert({
+      name,
+      email,
+      password,
+    });
+  }
+
   public async updateBalance(id: number, newBalance: number): Promise<UpdateResult> {
     const updated = await this.ClientRepository.update({ id }, { balance: newBalance });
     return updated;

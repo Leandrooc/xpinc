@@ -1,5 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import { Request, Response } from 'express';
+import bcrypt from 'bcrypt';
 import Client from '../entities/Client';
 import { HttpError } from '../middlewares/error';
 import AccountService from '../services/AccountService';
@@ -62,5 +63,15 @@ export default class AccountController {
     const client = await this.accountService.getClientByAsset(+clientId);
     if (!client) return res.status(404).json({ message: 'Cliente não encontrado' });
     return res.status(200).json(client);
+  }
+
+  async createClient(req: Request, res: Response): Promise<Response> {
+    const { name, email, password } = req.body;
+    await this.accountService.verifyEmail(email);
+
+    const hashPassword = await bcrypt.hash(password, 10);
+    await this.accountService.createClient(name, email, hashPassword);
+
+    return res.status(201).json({ message: 'Conta criada com sucesso!' });
   }
 }
