@@ -11,19 +11,19 @@ export default class AccountService {
   }
 
   public async getClients(): Promise<[Client[], number]> {
-    const users = await this.ClientRepository.findAndCount({
+    const clients = await this.ClientRepository.findAndCount({
       select: [
         'id',
         'balance',
       ],
     });
-    return users;
+    return clients;
   }
 
-  public async getUserById(id: number): Promise<Client> {
-    const user = await this.ClientRepository.findOne({ where: { id } });
-    if (!user) throw new HttpError('Cliente não encontrado!', 404);
-    return user;
+  public async getClientById(id: number): Promise<Client> {
+    const client = await this.ClientRepository.findOne({ where: { id } });
+    if (!client) throw new HttpError('Cliente não encontrado!', 404);
+    return client;
   }
 
   public async updateBalance(id: number, newBalance: number): Promise<UpdateResult> {

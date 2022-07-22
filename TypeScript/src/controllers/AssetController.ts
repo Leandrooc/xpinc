@@ -15,7 +15,7 @@ export default class AssetController {
 
   async getAssetById(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
-    const assets = await this.assetService.getAssetById(+id);
-    return res.status(200).json(assets);
+    const asset = await this.assetService.getAssetById(+id);
+    return res.status(200).json(asset);
   }
 }
