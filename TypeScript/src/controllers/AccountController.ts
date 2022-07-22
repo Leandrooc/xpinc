@@ -14,7 +14,7 @@ export default class AccountController {
   async deposit(req: Request, res: Response): Promise<Response> {
     const { clientId, depositValue } = req.body;
 
-    const user: Client = await this.accountService.getUserById(clientId);
+    const user: Client = await this.accountService.getClientById(clientId);
 
     const newBalance = +user.balance + (+depositValue);
 
@@ -31,7 +31,7 @@ export default class AccountController {
   async withdraw(req: Request, res: Response): Promise<Response> {
     const { clientId, withdrawValue } = req.body;
 
-    const user: Client = await this.accountService.getUserById(clientId);
+    const user: Client = await this.accountService.getClientById(clientId);
 
     const newBalance = +user.balance - (+withdrawValue);
     if (newBalance < 0) throw new HttpError('Saldo insuficiente', 400);
@@ -48,7 +48,7 @@ export default class AccountController {
 
   async getBalance(req: Request, res: Response): Promise<Response> {
     const { clientId } = req.params;
-    const { id, balance }: Client = await this.accountService.getUserById(+clientId);
+    const { id, balance }: Client = await this.accountService.getClientById(+clientId);
     return res.status(200).json({ clientId: id, balance });
   }
 
