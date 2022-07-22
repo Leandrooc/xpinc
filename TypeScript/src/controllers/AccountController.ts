@@ -56,4 +56,11 @@ export default class AccountController {
     const [clients, numberOfClients] = await this.accountService.getClients();
     return res.status(200).json({ numberOfClients, clients });
   }
+
+  async getClientByAsset(req: Request, res: Response): Promise<Response> {
+    const { clientId } = req.params;
+    const client = await this.accountService.getClientByAsset(+clientId);
+    if (!client) return res.status(404).json({ message: 'Cliente não encontrado' });
+    return res.status(200).json(client);
+  }
 }

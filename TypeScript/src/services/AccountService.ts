@@ -1,5 +1,6 @@
 import { Repository, UpdateResult } from 'typeorm';
 import Client from '../entities/Client';
+import { IClientByAsset } from '../interfaces.ts/IClientByAsset';
 import { HttpError } from '../middlewares/error';
 
 export default class AccountService {
@@ -28,5 +29,22 @@ export default class AccountService {
   public async updateBalance(id: number, newBalance: number): Promise<UpdateResult> {
     const updated = await this.ClientRepository.update({ id }, { balance: newBalance });
     return updated;
+  }
+
+  public async getClientByAsset(id: number): Promise<IClientByAsset | null> {
+    const client = await this.ClientRepository.findOne({ where: { id }, relations: ['assetInCustody.assetId'], select: ['id', 'balance'] });
+    if (client) {
+      const formatedClient = {
+        clientId: client.id,
+        clientBalance: client.balance,
+        assetsInCustody: client.assetInCustody.map((asset: any) => ({
+          assetId: asset.id,
+          quantity: asset.quantity,
+          value: asset.assetId.value,
+        })).filter(({ quantity }) => quantity > 0),
+      };
+      return formatedClient;
+    }
+    return client;
   }
 }

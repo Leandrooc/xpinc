@@ -21,6 +21,11 @@ accountRouter.post(
 );
 
 accountRouter.get(
+  '/:clientId/assets',
+  (req: Request, res: Response) => accountController.getClientByAsset(req, res),
+);
+
+accountRouter.get(
   '/:clientId',
   (req: Request, res: Response) => accountController.getBalance(req, res),
 );
