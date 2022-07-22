@@ -11,6 +11,7 @@ const accountController = new AccountController(accountServiceWithRepository);
 
 accountRouter.post(
   '/',
+  middlewares.createClient,
   (req: Request, res: Response) => accountController.createClient(req, res),
 );
 
