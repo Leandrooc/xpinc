@@ -2,7 +2,7 @@
 import { Repository } from 'typeorm';
 import Asset from '../../entities/Asset';
 import AssetService from '../../services/AssetService';
-import AssetMocks from './mocks/Asset.mock';
+import AssetMocks from '../mocks/Asset.mock';
 
 describe('AssetService with mocked repository', () => {
   const { findAndCount, getAssetsExpectedResult, findOne } = AssetMocks;
