@@ -34,7 +34,15 @@ const getAssetsExpectedResult = [
   ],
 ];
 
+const findOne = {
+  id: 1,
+  name: 'XPX',
+  quantity: 6,
+  value: '1.000000',
+};
+
 export default {
   findAndCount,
   getAssetsExpectedResult,
+  findOne,
 };
