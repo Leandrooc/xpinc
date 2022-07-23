@@ -14,7 +14,7 @@ const findAndCount = [
   2,
 ];
 
-const findAndCountExpectedResult = [
+const getAssetsExpectedResult = [
   {
     numberOfAssets: 2,
   },
@@ -36,5 +36,5 @@ const findAndCountExpectedResult = [
 
 export default {
   findAndCount,
-  findAndCountExpectedResult,
+  getAssetsExpectedResult,
 };

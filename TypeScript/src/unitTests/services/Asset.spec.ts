@@ -6,7 +6,7 @@ import AssetMocks from './mocks/Asset.mock';
 
 describe('AssetService with mocked repository', () => {
   it('the getAssets method returns the correct array', async () => {
-    const { findAndCount, findAndCountExpectedResult } = AssetMocks;
+    const { findAndCount, getAssetsExpectedResult } = AssetMocks;
 
     const AssetRepositoryMock = {
       findAndCount: () => findAndCount,
@@ -15,6 +15,6 @@ describe('AssetService with mocked repository', () => {
     const AssetServiceMock = new AssetService(AssetRepositoryMock);
 
     const result = await AssetServiceMock.getAssets();
-    expect(result).toEqual(findAndCountExpectedResult);
+    expect(result).toEqual(getAssetsExpectedResult);
   });
 });
