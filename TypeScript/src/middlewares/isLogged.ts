@@ -5,7 +5,6 @@ import { HttpError } from './error';
 export default function isLogged(req: Request, res: Response, next: NextFunction) {
   const { authorization } = req.headers;
   const token = authorization;
-  console.log(token, 'here');
   if (!token) throw new HttpError('Token não encontrado', 401);
 
   try {
