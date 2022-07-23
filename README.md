@@ -88,3 +88,7 @@ password: xpinc9
 ### Observações:
 
 - O arquivo init.sql é usado para criar o banco de dados vazio e o TypeORM conseguir se conectar antes de rodas as migrations.
+
+:smile: 
+
+![xp](https://user-images.githubusercontent.com/83525738/180625523-f39a7df9-c755-40f8-a072-7a92ec786390.png)
