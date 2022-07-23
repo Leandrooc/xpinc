@@ -54,19 +54,20 @@ Alguns problemas pequenos, mas esses consegui encontrar a solução mais rapidam
 
 1 - Clone o repositório e entre na pasta Typescript.
 
-2 - Instale as dependências com npm i
+2 - Instale as dependências com - npm i
 
 3 - Confira se a porta 3306 e 3000 estão livres.
 Talvez sejá necessário executar o script npm run kill3000, caso a porta esteja ocupada e sudo service mysql stop.
 
 4 - Suba o container com o comando => docker-compose up -d
-- Inicie o servidor com npm run dev, ou npm start.
+- Rode os testes com - npm test
+- Inicie o servidor com npm run dev ou npm start.
 
 
 5 - abra outro terminal e execute as migrations/seeds.
 
-npm run migration:run <br>
-npm run seeds:run
+- npm run migration:run <br>
+- npm run seeds:run
 
 6 - :grin: Se tudo ocorreu bem, a aplicação já está rodando.
 
@@ -75,6 +76,14 @@ name: XPInc <br>
 email: xpinc@xp.com <br>
 password: xpinc9
 
+## Requisitos Totais
+- [X] Endpoints listados;
+- [X] Endpoint que retorna todas as ações de um cliente com o valor unitário e o total investido;
+
+- [X] Registro e Login com Jwt;
+-   Testes unitários - Realizados só na rota de ações(assets);
+- [ ] Deploy;
+- [ ] Swagger;
 
 ### Observações:
 
