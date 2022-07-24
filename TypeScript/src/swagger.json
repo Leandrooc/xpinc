@@ -275,9 +275,19 @@
       }
     },
     "/investment/buy": {
-      "get": {
+      "post": {
         "tags": ["Investment"],
-        "description": "Compra uma ação, na quantidade especificada",
+        "description": "Compra um ativo, na quantidade especificada",
+        "requestBody": {
+          "description": "Informações necessárias para comprar ativos",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComprarAtivo"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Compra realizada com sucesso!"
@@ -292,9 +302,19 @@
       }
     },
     "/investment/sell": {
-      "get": {
+      "post": {
         "tags": ["Investment"],
-        "description": "Vende uma ação, na quantidade especificada",
+        "description": "Vende um ativo, na quantidade especificada",
+        "requestBody": {
+          "description": "Informações necessárias para vender ativos",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VenderAtivo"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Venda realizada com sucesso!"
@@ -545,7 +565,47 @@
         "example": 5
      }
       }
+    },
+    "ComprarAtivo": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "integer",
+          "description": "Id do cliente",
+          "example": 1
+        },
+        "assetId": {
+          "type": "integer",
+          "description": "Id do ativo",
+          "example": 2
+        },
+        "quantity": {
+          "type": "integer",
+          "description": "Quantidade do ativo",
+          "example": 5
+        }
     }
+  },
+  "VenderAtivo": {
+    "type": "object",
+    "properties": {
+      "clientId": {
+        "type": "integer",
+        "description": "Id do cliente",
+        "example": 1
+      },
+      "assetId": {
+        "type": "integer",
+        "description": "Id do ativo",
+        "example": 2
+      },
+      "quantity": {
+        "type": "integer",
+        "description": "Quantidade do ativo",
+        "example": 5
+      }
+  }
+}
     },
     "securitySchemes": {
       "ApiKeyAuth": {
