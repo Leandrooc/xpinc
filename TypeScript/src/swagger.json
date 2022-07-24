@@ -50,6 +50,9 @@
     },
     "/account/me": {
       "get": {
+        "security": [{
+          "ApiKeyAuth": []
+        }],
         "description": "Buscar as informações do cliente logado junto de seus ativos",
         "responses": {
           "401": {
@@ -146,6 +149,14 @@
                 "totalValue": 15 }]
           }
         }
+      }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "description": "Autenticação JWT",
+        "name": "Authorization",
+        "in": "header"
       }
     }
   }
