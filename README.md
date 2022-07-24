@@ -32,7 +32,7 @@ pois é possível mockar o banco de dados facilmente.
 Usei o excalidraw para pensar sobre como resolver o case, algumas regras usadas:
 
 - 3 Tabelas, sendo elas, clientes, ações, e ações sobre custódia.
-- A tabela de clientes(clients) guarda o nome, email, senha criptografada e o saldo da conta e um id único.
+- A tabela de clientes(clients) guarda o nome, email, senha criptografada, o saldo da conta e um id único.
 - A tabela de ações(assets) guarda o nome das ações, seu preço unitário, quantidade disponível na corretora e um id único.
 - A tabela de ações sobre custódia(assets_in_custody) guarda o id do cliente(client_id) relacionado com o id da ação(asset_id), e a quantidade que ele possui em sua carteira.
 
@@ -48,7 +48,7 @@ Usei o excalidraw para pensar sobre como resolver o case, algumas regras usadas:
 - Erro ao tentar usar o this nos controllers, onde se perdia a referência da instância criada, resolvi depois de muito tempo pesquisando
 no Google, StackOverflow e youtube. Obs: Era necessário capturar os parâmetros Req/Res nas rotas e retonar como parâmetro do Controller.
 - Dificuldade em fazer seeds com o typeORM, criei um arquivo seeds/index isolado para isso.
-Alguns problemas pequenos, mas esses consegui encontrar a solução mais rapidamente.
+- Alguns problemas pequenos, mas esses consegui encontrar a solução mais rapidamente.
 
 ### Como rodar o projeto:
 
