@@ -22,7 +22,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 ### Escolha das tecnologias
 
 Eu adoro desafios, então resolvi me desafiar a aprender novas tecnologias, para colocar em prática os últimos conceitos adquiridos no curso da Trybe,
-dentre eles, Typescript com express, autenticação, SOLID (Responsabilidade única e Inversão de Dependência principalmente).
+dentre eles, Typescript com express, autenticação e SOLID (Responsabilidade única e Inversão de Dependência principalmente).
 Escolhi o TypeORM por não ser abordado no curso, para trabalhar com o conceito de Entidades, Repositórios e aplicar a Inversão de Dependência,
 onde as classes de Controller e Service não precisam conhecer onde ou como as ações serão executadas, oque também facilita a escrita de testes unitários,
 pois é possível mockar o banco de dados facilmente.
@@ -35,6 +35,9 @@ Usei o excalidraw para pensar sobre como resolver o case, algumas regras usadas:
 - A tabela de clientes(clients) guarda o nome, email, senha criptografada, o saldo da conta e um id único.
 - A tabela de ações(assets) guarda o nome das ações, seu preço unitário, quantidade disponível na corretora e um id único.
 - A tabela de ações sobre custódia(assets_in_custody) guarda o id do cliente(client_id) relacionado com o id da ação(asset_id), e a quantidade que ele possui em sua carteira.
+
+Uma parte do Excalidraw =>
+![buyandsell](https://user-images.githubusercontent.com/83525738/180661267-ed35c306-29b2-475c-9283-a504c4534346.png)
 
 #### Alguns detalhes:
 
@@ -54,22 +57,22 @@ no Google, StackOverflow e youtube. Obs: Era necessário capturar os parâmetros
 
 1 - Clone o repositório e entre na pasta Typescript.
 
-2 - Instale as dependências com - npm i
+2 - Instale as dependências com `npm i`
 
 3 - Confira se a porta 3306 e 3000 estão livres.
-Talvez sejá necessário executar o script npm run kill3000, caso a porta esteja ocupada e sudo service mysql stop.
+Talvez sejá necessário executar o script npm run kill3000, caso a porta esteja ocupada e sudo service mysql stop para parar o mysql Local.
 
-4 - Suba o container com o comando => docker-compose up -d
-- Rode os testes com - npm test
-- Inicie o servidor com npm run dev ou npm start.
-
+4 - Suba o container do MySQL com o comando => `docker-compose up -d`
+- Rode os testes com - `npm test`
+- Inicie o servidor com `npm run dev` ou `npm start`.
 
 5 - abra outro terminal e execute as migrations/seeds.
 
-- npm run migration:run <br>
-- npm run seeds:run
+- `npm run migration:run` <br>
+- `npm run seeds:run`
 
 6 - :grin: Se tudo ocorreu bem, a aplicação já está rodando.
+(Em caso de erro no nodemon, salvar o arquivo para recarregar ou usar `npm start`)
 
 Um dos usuários criados apartir das seeds => <br>
 name: XPInc <br>
@@ -78,7 +81,7 @@ password: xpinc9
 
 ## Requisitos Totais
 - [X] Endpoints listados;
-- [X] Endpoint que retorna todas as ações de um cliente com o valor unitário e o total investido;
+- [X] Endpoint que retorna todas as ações de um cliente com o valor unitário e o total investido (/account/me);
 
 - [X] Registro e Login com Jwt;
 -   Testes unitários - Realizados só na rota de ações(assets);
@@ -88,13 +91,15 @@ password: xpinc9
 ### Observações:
 
 - O arquivo init.sql é usado para criar o banco de dados vazio e o TypeORM conseguir se conectar antes de rodas as migrations.
-
-:smile: 
+- :smile: 
 
 ![xp](https://user-images.githubusercontent.com/83525738/180625523-f39a7df9-c755-40f8-a072-7a92ec786390.png)
 
 # Rotas:
 
-![swagger](https://user-images.githubusercontent.com/83525738/180634337-d57284fd-8f79-4031-b3a1-d60370b4aab6.png)
+Swagger: http://localhost:3000/api-docs/
+
+![swaggerroutes](https://user-images.githubusercontent.com/83525738/180660017-57aa9497-f0d0-4745-8b09-883848fa7309.png)
+
 
 
