@@ -273,6 +273,40 @@
         }
         }
       }
+    },
+    "/investment/buy": {
+      "get": {
+        "tags": ["Investment"],
+        "description": "Compra uma ação, na quantidade especificada",
+        "responses": {
+          "200": {
+            "description": "Compra realizada com sucesso!"
+        },
+        "404": {
+          "description": "Ativo ou cliente não encontrado"
+        },
+        "400": {
+          "description": "Saldo ou quantidade na corretora insuficiente, campos inválidos"
+        }
+        }
+      }
+    },
+    "/investment/sell": {
+      "get": {
+        "tags": ["Investment"],
+        "description": "Vende uma ação, na quantidade especificada",
+        "responses": {
+          "200": {
+            "description": "Venda realizada com sucesso!"
+        },
+        "404": {
+          "description": "Ativo não encontrado na carteira ou cliente não encontrado"
+        },
+        "400": {
+          "description": "Quantidade de ativos insuficientes, campos inválidos"
+        }
+        }
+      }
     }
   },
   "components": {

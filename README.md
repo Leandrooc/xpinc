@@ -83,7 +83,7 @@ password: xpinc9
 - [X] Registro e Login com Jwt;
 -   Testes unitários - Realizados só na rota de ações(assets);
 - [ ] Deploy;
-- [ ] Swagger;
+- [X] Swagger;
 
 ### Observações:
 
@@ -92,3 +92,9 @@ password: xpinc9
 :smile: 
 
 ![xp](https://user-images.githubusercontent.com/83525738/180625523-f39a7df9-c755-40f8-a072-7a92ec786390.png)
+
+# Rotas:
+
+![swagger](https://user-images.githubusercontent.com/83525738/180634337-d57284fd-8f79-4031-b3a1-d60370b4aab6.png)
+
+
