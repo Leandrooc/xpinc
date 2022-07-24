@@ -8,7 +8,7 @@ export default class InvestmentController {
     this.investmentService = investmentService;
   }
 
-  async buy(req: Request, res: Response): Promise<Response> {
+  public async buy(req: Request, res: Response): Promise<Response> {
     const { clientId, assetId, quantity } = req.body;
     const success = await this.investmentService.buy(clientId, assetId, quantity);
 
@@ -16,7 +16,7 @@ export default class InvestmentController {
     return res.status(201).json({ message: 'Compra realizada com sucesso' });
   }
 
-  async sell(req: Request, res: Response): Promise<Response> {
+  public async sell(req: Request, res: Response): Promise<Response> {
     const { clientId, assetId, quantity } = req.body;
     const success = await this.investmentService.sell(clientId, assetId, quantity);
 

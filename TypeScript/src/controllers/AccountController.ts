@@ -13,7 +13,7 @@ export default class AccountController {
     this.accountService = accountService;
   }
 
-  async deposit(req: Request, res: Response): Promise<Response> {
+  public async deposit(req: Request, res: Response): Promise<Response> {
     const { clientId, depositValue } = req.body;
 
     const user: Client = await this.accountService.getClientById(clientId);
@@ -30,7 +30,7 @@ export default class AccountController {
     });
   }
 
-  async withdraw(req: Request, res: Response): Promise<Response> {
+  public async withdraw(req: Request, res: Response): Promise<Response> {
     const { clientId, withdrawValue } = req.body;
 
     const user: Client = await this.accountService.getClientById(clientId);
@@ -48,25 +48,25 @@ export default class AccountController {
     });
   }
 
-  async getBalance(req: Request, res: Response): Promise<Response> {
+  public async getBalance(req: Request, res: Response): Promise<Response> {
     const { clientId } = req.params;
     const { id, balance }: Client = await this.accountService.getClientById(+clientId);
     return res.status(200).json({ clientId: id, balance });
   }
 
-  async getClients(req: Request, res: Response): Promise<Response> {
+  public async getClients(req: Request, res: Response): Promise<Response> {
     const [clients, numberOfClients] = await this.accountService.getClients();
     return res.status(200).json({ numberOfClients, clients });
   }
 
-  async getClientByAsset(req: Request, res: Response): Promise<Response> {
+  public async getClientByAsset(req: Request, res: Response): Promise<Response> {
     const { clientId } = req.params;
     const client = await this.accountService.getClientByAsset(+clientId);
     if (!client) return res.status(404).json({ message: 'Cliente não encontrado' });
     return res.status(200).json(client);
   }
 
-  async createClient(req: Request, res: Response): Promise<Response> {
+  public async createClient(req: Request, res: Response): Promise<Response> {
     const { name, email, password } = req.body;
     await this.accountService.verifyEmail(email);
 
