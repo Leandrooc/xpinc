@@ -24,7 +24,7 @@ export default class AccountController {
 
     return res.status(200).json({
       message: 'Depósito efetuado com sucesso!',
-      user: user.id,
+      clientId: user.id,
       depositedValue: depositValue,
       newBalance,
     });
@@ -42,7 +42,7 @@ export default class AccountController {
 
     return res.status(200).json({
       message: 'Saque efetuado com sucesso!',
-      user: user.id,
+      clientId: user.id,
       withdrawalValue: withdrawValue,
       newBalance,
     });

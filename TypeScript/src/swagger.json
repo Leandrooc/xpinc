@@ -13,6 +13,7 @@
     "/account": {
       "post": {
         "description": "Criação de um novo cliente",
+        "tags": ["Account"],
         "requestBody": {
           "description": "Informações necessárias para criar um novo cliente",
           "content": {
@@ -34,6 +35,7 @@
       },
       "get": {
         "description": "Buscar todos os clientes",
+        "tags": ["Account"],
         "responses": {
           "200": {
             "content": {
@@ -50,6 +52,7 @@
     },
     "/account/me": {
       "get": {
+        "tags": ["Account"],
         "security": [{
           "ApiKeyAuth": []
         }],
@@ -67,6 +70,127 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/account/{clientId}": {
+      "get": {
+        "tags": ["Account"],
+        "description": "Busca uma conta pelo clientId",
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "path",
+            "description": "Id do cliente",
+            "type": "string",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClienteId"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Cliente não encontrado"
+          }
+        }
+      }
+    },
+    "/account/{clientId}/assets": {
+      "get": {
+        "tags": ["Account"],
+        "description": "Busca uma conta pelo id e retorna todos os ativos da conta",
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "path",
+            "description": "Id do cliente",
+            "type": "string",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ClienteLogado"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Cliente não encontrado"
+          }
+        }
+      }
+    },
+    "/account/deposit": {
+      "post": {
+        "tags": ["Account"],
+        "description": "Faz um depósito na conta do usuário",
+        "requestBody": {
+          "description": "Informações necessárias para fazer o depósito",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Deposito"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/DepositoResponse"
+              }
+            }
+          }
+        },
+          "400": {
+            "description": "Body incorreto ou valor menor ou igual a 0"
+          }
+        }
+      }
+    },
+    "/account/withdraw": {
+      "post": {
+        "tags": ["Account"],
+        "description": "Faz um saque na conta do usuário",
+        "requestBody": {
+          "description": "Informações necessárias para fazer o saque",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Saque"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/SaqueResponse"
+              }
+            }
+          }
+        },
+          "400": {
+            "description": "Body incorreto ou saldo insuficiente"
           }
         }
       }
@@ -110,6 +234,21 @@
           }
         }
       },
+      "ClienteId": {
+        "type": "object",
+        "properties": {
+          "clientId": {
+            "type": "integer",
+            "description": "Id do cliente",
+            "example": 1
+          },
+          "balance": {
+            "type": "decimal",
+            "description": "Saldo do cliente",
+            "example": "50.0000"
+          }
+        }
+      },
       "NumeroDeClientes": {
         "type": "object",
         "properties": {
@@ -149,7 +288,85 @@
                 "totalValue": 15 }]
           }
         }
+      },
+      "Deposito": {
+        "type": "object",
+        "properties": {
+          "clientId": {
+            "type": "integer",
+            "description": "Id do cliente",
+            "example": 1
+          },
+          "depositValue": {
+            "type": "decimal",
+            "description": "Valor do depósito",
+            "example": 6000.50
+          }
       }
+    },
+    "DepositoResponse": {
+      "type": "object",
+      "properties": {
+        "message": { 
+        "description": "mensagem de depósito",
+        "example": "Depósito efetuado com sucesso!"
+       },
+        "clientId": {
+          "type": "integer",
+          "description": "Id do cliente",
+          "example": 1
+        },
+        "depositedValue": {
+          "type": "decimal",
+          "description": "Valor do depósito",
+          "example": 6000.50
+        },
+        "newBalance": {
+          "type": "decimal",
+          "description": "Novo saldo do cliente",
+          "example": 6600.50
+        }
+    }
+  },
+      "Saque": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "integer",
+          "description": "Id do cliente",
+          "example": 1
+       },
+      "withdrawValue": {
+          "type": "decimal",
+          "description": "Valor do Saque",
+          "example": 600.25
+      }
+    }
+   },
+      "SaqueResponse": {
+         "type": "object",
+         "properties": {
+         "message": { 
+             "description": "mensagem de saque",
+             "example": "Saque efetuado com sucesso!"
+          },
+    "clientId": {
+      "type": "integer",
+      "description": "Id do cliente",
+      "example": 1
+    },
+    "withdrawalValue": {
+      "type": "decimal",
+      "description": "Valor do saque",
+      "example": 400
+    },
+    "newBalance": {
+      "type": "decimal",
+      "description": "Novo saldo do cliente",
+      "example": 6600.50
+    }
+}
+}
     },
     "securitySchemes": {
       "ApiKeyAuth": {
