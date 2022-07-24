@@ -47,6 +47,26 @@
           }
     }
   }
+    },
+    "/account/me": {
+      "get": {
+        "description": "Buscar as informações do cliente logado junto de seus ativos",
+        "responses": {
+          "401": {
+            "description": "Token não encontrado ou inválido"
+          },
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ClienteLogado"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -100,6 +120,30 @@
             "items": {
               "$ref": "#/components/schemas/Cliente"
             }
+          }
+        }
+      },
+      "ClienteLogado": {
+        "type": "object",
+        "properties": {
+          "clientId": {
+            "type": "integer",
+            "description": "Id do cliente",
+            "example": 1
+          },
+          "clientBalance": {
+            "type": "integer",
+            "description": "Saldo do cliente",
+            "example": 1
+          },
+          "assetsInCustody": {
+            "type": "array",
+            "description": "Todas as ações que o cliente possui",
+            "example": [{
+                "assetId": 1,
+                "quantity": 3,
+                "value": "5.000000",
+                "totalValue": 15 }]
           }
         }
       }

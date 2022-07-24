@@ -16,10 +16,10 @@ export default class LoginService {
 
   public async auth(email: string, password: string) {
     const client = await this.ClientRepository.findOneBy({ email });
-    if (!client) throw new HttpError('Email ou senha inválidos!', 400);
+    if (!client) throw new HttpError('Email ou senha inválidos!', 401);
 
     const verifyPassword = await bcrypt.compare(password, client.password);
-    if (!verifyPassword) throw new HttpError('Email ou senha inválidos!', 400);
+    if (!verifyPassword) throw new HttpError('Email ou senha inválidos!', 401);
 
     const token = jwt.sign({ id: client.id }, this.jwtSecret, { expiresIn: '4h' });
     return token;
