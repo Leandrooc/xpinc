@@ -194,6 +194,85 @@
           }
         }
       }
+    },
+    "/login": {
+      "post": {
+        "tags": ["Login"],
+        "description": "Faz login",
+        "requestBody": {
+          "description": "Informações necessárias para fazer o login",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/Token"
+              }
+            }
+          }
+        },
+          "400": {
+            "description": "Body incorreto"
+          },
+          "401": {
+            "description": "Email ou senha inválidos!"
+          }
+        }
+      }
+    },
+    "/assets": {
+      "get": {
+        "tags": ["Asset"],
+        "description": "Busca os ativos disponiveis na corretora",
+        "responses": {
+          "200": {
+            "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/NumeroDeAssets"
+              }
+            }
+          }
+        }
+        }
+      }
+    },
+    "/assets/{id}": {
+      "get": {
+        "tags": ["Asset"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do ativo",
+            "type": "string",
+            "required": "true"
+          }
+        ],
+        "description": "Busca um ativo por id",
+        "responses": {
+          "200": {
+            "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/Asset"
+              }
+            }
+          }
+        }
+        }
+      }
     }
   },
   "components": {
@@ -261,6 +340,22 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Cliente"
+            }
+          }
+        }
+      },
+      "NumeroDeAssets": {
+        "type": "object",
+        "properties": {
+          "numberOfAssets": {
+            "type": "integer",
+            "description": "Numero de ativos",
+            "example": 1
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Asset"
             }
           }
         }
@@ -365,8 +460,58 @@
       "description": "Novo saldo do cliente",
       "example": 6600.50
     }
-}
-}
+   }
+  },
+    "Login": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Email do cliente",
+          "example": "client@hotmail.com"
+        },
+        "password": {
+          "type": "string",
+          "description": "Senha do cliente",
+          "example": "password123"
+        }
+      }
+    }, 
+    "Token": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "jwt",
+          "description": "Token JWT",
+          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTY1ODYzOTgwMywiZXhwIjoxNjU4NjU0MjAzfQ.w9LS0l4-iZExi6AoKAEmbcHzOv47_KrfAEIOuYV6wkI"
+        }
+      }
+    },
+    "Asset": {
+      "type": "object",
+      "properties": {
+          "id": {
+             "type": "integer",
+             "description": "Id do Ativo",
+             "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "Nome do Ativo",
+            "example": "XPI"
+         },
+         "quantity": {
+          "type": "integer",
+          "description": "Quantidade disponível na corretora",
+          "example": 50
+       },
+       "value": {
+        "type": "integer",
+        "description": "Valor unitário do ativo",
+        "example": 5
+     }
+      }
+    }
     },
     "securitySchemes": {
       "ApiKeyAuth": {

@@ -9,9 +9,9 @@ export default class AssetService {
     this.AssetRepository = assetRepository;
   }
 
-  public async getAssets(): Promise<[{ numberOfAssets: number }, Asset[]]> {
+  public async getAssets(): Promise<{ numberOfAssets: number, assets: Asset[] }> {
     const [assets, numberOfAssets] = await this.AssetRepository.findAndCount();
-    return [{ numberOfAssets }, assets];
+    return { numberOfAssets, assets };
   }
 
   public async getAssetById(id: number): Promise<Asset> {
