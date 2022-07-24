@@ -1,4 +1,4 @@
-import { Repository, UpdateResult } from 'typeorm';
+import { InsertResult, Repository, UpdateResult } from 'typeorm';
 import Client from '../entities/Client';
 import { IClientByAsset } from '../interfaces.ts/IClientByAsset';
 import { HttpError } from '../middlewares/error';
@@ -31,8 +31,8 @@ export default class AccountService {
     if (client) throw new HttpError('Esse email já está registrado', 400);
   }
 
-  public async createClient(name: string, email: string, password: string): Promise<void> {
-    await this.ClientRepository.insert({
+  public createClient(name: string, email: string, password: string): Promise<InsertResult> {
+    return this.ClientRepository.insert({
       name,
       email,
       password,

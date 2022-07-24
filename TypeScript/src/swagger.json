@@ -1,0 +1,108 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "XPInc API",
+    "description": "Api de ativos financeiros",
+    "contact": {
+      "name": "Support",
+      "email": "19leandro3quietmsl@gmail.com"
+    },
+    "version": "1.0"
+  },
+  "paths": {
+    "/account": {
+      "post": {
+        "description": "Criação de um novo cliente",
+        "requestBody": {
+          "description": "Informações necessárias para criar um novo cliente",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NovoCliente"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Cliente registrado com sucesso!"
+          },
+          "400": {
+            "description": "Dados incorretos ou email já está registrado"
+          }
+        }
+      },
+      "get": {
+        "description": "Buscar todos os clientes",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/NumeroDeClientes"
+                }
+              }
+            }
+          }
+    }
+  }
+    }
+  },
+  "components": {
+    "schemas": {
+      "NovoCliente": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nome do cliente",
+            "example": "user12345"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email do cliente",
+            "example": "user@hotmail.com"
+
+          },
+          "password": {
+            "type": "string",
+            "description": "Senha do cliente",
+            "example": "password9"
+          }
+        }
+      },
+      "Cliente": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Id do cliente",
+            "example": 1
+          },
+          "balance": {
+            "type": "decimal",
+            "description": "Saldo do cliente",
+            "example": "252.0000"
+          }
+        }
+      },
+      "NumeroDeClientes": {
+        "type": "object",
+        "properties": {
+          "numberOfClients": {
+            "type": "integer",
+            "description": "Numero de clientes",
+            "example": 1
+          },
+          "clients": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Cliente"
+            }
+          }
+        }
+      }
+    }
+  }
+}

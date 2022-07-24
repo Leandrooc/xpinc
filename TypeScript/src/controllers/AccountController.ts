@@ -1,6 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import Client from '../entities/Client';
 import { HttpError } from '../middlewares/error';
 import AccountService from '../services/AccountService';
@@ -70,9 +71,11 @@ export default class AccountController {
     await this.accountService.verifyEmail(email);
 
     const hashPassword = await bcrypt.hash(password, 10);
-    await this.accountService.createClient(name, email, hashPassword);
+    const client = await this.accountService.createClient(name, email, hashPassword);
 
-    return res.status(201).json({ message: 'Conta criada com sucesso!' });
+    const token = jwt.sign({ id: client.generatedMaps[0].id }, 'XP', { expiresIn: '4h' });
+
+    return res.status(201).json({ message: 'Conta criada com sucesso!', token });
   }
 
   public async getAssetsValue(req: Request, res: Response): Promise<Response> {
